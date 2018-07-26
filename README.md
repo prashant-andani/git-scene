@@ -3,7 +3,7 @@ Git contribution graph
 
 #### How to Run
 
-getData(REPO_PATH);
+`getData(REPO_PATH);`
 
 `node open.js`
 
