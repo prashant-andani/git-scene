@@ -1,6 +1,6 @@
 # git-graph
 Git contribution graph
 
-####How to Run
+#### How to Run
 `node open.js`
 
