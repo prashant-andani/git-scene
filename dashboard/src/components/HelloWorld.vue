@@ -35,9 +35,11 @@ export default {
   },
   data: function() {
     let dashboard = json;
-    let dateFormat = moment(dashboard.lastCommit.date).format('DD-MMM-YYYY');
-    dateFormat = moment(dateFormat, 'DD-MMM-YYYY').fromNow();
-    dashboard.lastCommit.date = dateFormat;
+    if (dashboard.lastCommit.date) {
+      let date = moment(dashboard.lastCommit.date).fromNow();
+      dashboard.lastCommit.date = date;
+    }
+
     return {
       dashboard,
       commits,

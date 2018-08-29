@@ -19,7 +19,7 @@
 
 <script>
 export default {
-  name: 'Contributors',
+  name: "Contributors",
   props: {
     data: Object
   }

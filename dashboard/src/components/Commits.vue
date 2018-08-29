@@ -1,7 +1,7 @@
 <template>
   <div>
 
-    <!-- Lst 10 Commits -->
+    <!-- List 10 Commits -->
     <div class="box contributors-list">
       <div class="header-label">Last 10 commits</div>
       <div class="content contrib-content">
@@ -9,6 +9,7 @@
           <div v-for="(commit, count) in commits" v-if="count < 10" class="commit" v-bind:key="$index">
             <div>{{commit.message}}</div>
             <div class="label">{{commit.author}}</div>
+            <div>{{moment(commit.date).fromNow()}}</div>
           </div>
         </div>
       </div>
@@ -17,10 +18,15 @@
 </template>
 
 <script>
+import moment from 'moment';
+
 export default {
   name: 'Commits',
   props: {
     commits: Object
+  },
+  data: () => {
+    return { moment };
   }
 };
 </script>
