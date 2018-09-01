@@ -1,0 +1,25 @@
+{
+  "projectName": "git-graph",
+  "projectOwner": "prashant-andani",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "prashant-andani",
+      "name": "Prashant Andani",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/829627?s=460&v=4",
+      "profile": "https://github.com/prashant-andani",
+      "contributions": [
+        "code",
+        "doc",
+        "infra",
+        "test",
+        "tutorial",
+        "video"
+      ]
+    }
+  ]
+}
