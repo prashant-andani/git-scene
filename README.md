@@ -1,4 +1,5 @@
-# git-graph
+# git-graph :tada:
+
 Git contribution graph
 
 #### How to Run
@@ -13,3 +14,5 @@ Inside the dashboard folder
 `npm install` and then
 
 `vue ui`
+
+![Screenshot](https://raw.githubusercontent.com/prashant-andani/git-graph/master/screenshot.png)
