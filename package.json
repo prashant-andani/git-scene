@@ -10,7 +10,8 @@
   "author": "Prashant Andani",
   "license": "MIT",
   "dependencies": {
-    "colors": "^1.3.1",
+    "cli-gh-cal": "^1.4.9",
+    "colors": "^1.3.2",
     "moment": "^2.22.2",
     "nodegit": "^0.22.2",
     "promise": "^8.0.1"

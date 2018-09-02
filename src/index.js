@@ -1,10 +1,24 @@
 const nodegit = require('nodegit');
 const Promise = require('promise');
 const colors = require('colors/safe');
-const moment = require('moment');
+const Moment = require('moment');
 const fs = require('fs');
-
+const CliGhCal = require('cli-gh-cal');
 // const toTimestamp = strDate => Date.parse(strDate);
+const getCalendar = data => {
+  const cal = Object.entries(data);
+  console.log(colors.yellow('-------------------------------------'));
+  console.log(colors.green('Contribution Calendar'));
+  console.log(colors.yellow('-------------------------------------'));
+
+  console.log(
+    CliGhCal(cal, {
+      theme: 'DARK',
+      start: new Moment().subtract(1, 'years'),
+      end: new Moment()
+    })
+  );
+};
 
 const getReport = commits => {
   const authors = {};
@@ -19,7 +33,7 @@ const getReport = commits => {
     authors[author] += 1;
     // commits by date
     const date = new Date(commits[i].date());
-    const momentDate = moment(date).format('DD-MMM-YYYY');
+    const momentDate = Moment(date).format('DD-MMM-YYYY');
     // date = toTimestamp(date);
     if (!dates[momentDate]) {
       dates[momentDate] = 0;
@@ -46,7 +60,8 @@ const getReport = commits => {
       // console.log(String(blob));
     });
   const json = JSON.stringify(dates);
-  console.log(json);
+  getCalendar(dates);
+  //  console.log(json);
   fs.writeFile('dashboard/data/commits_count.json', json);
   return obj;
 };
@@ -83,9 +98,9 @@ const generateContribList = commits => {
     }
     authors[author] += 1;
   }
+  console.log(colors.yellow('-------------------------------------'));
   console.log(colors.rainbow('**** Contributors ****'));
   console.log(colors.yellow('-------------------------------------'));
-  console.log();
 
   Object.keys(authors).forEach(author => {
     console.log('*', author, '--', colors.green(authors[author]));
@@ -95,6 +110,7 @@ const generateContribList = commits => {
   const totalContributors = Object.keys(authors).length;
   console.log(colors.green(`No. of Contributors: ${totalContributors}`));
   console.log(colors.green(`Total Commits: ${commits.length}`)); // outputs green text
+  console.log(colors.yellow('-------------------------------------'));
 };
 
 const shipCommits = commits => {
@@ -175,7 +191,7 @@ const fetchAllCommits = repoPath => {
           return p;
         })
         .then(commits => {
-          // getReport(commits);
+          getReport(commits);
           generateContribList(commits);
           // shipDashboardData(commits, branchName);
           shipCommits(commits);
@@ -189,4 +205,4 @@ const fetchAllCommits = repoPath => {
       console.log('Finished');
     });
 };
-fetchAllCommits('./');
+fetchAllCommits('../../code-setup');
