@@ -4,7 +4,6 @@ const colors = require('colors/safe');
 const Moment = require('moment');
 const fs = require('fs');
 const CliGhCal = require('cli-gh-cal');
-const path = require('path');
 
 const getCalendar = data => {
   const cal = Object.entries(data);
@@ -107,8 +106,8 @@ const shipCommits = commits => {
 
     commitObj.push(commit);
   }
-  const json = JSON.stringify(commitObj);
-  fs.writeFile('dashboard/data/commits.json', json);
+  // const json = JSON.stringify(commitObj);
+  // fs.writeFile('dashboard/data/commits.json', json);
   return commitObj;
 };
 

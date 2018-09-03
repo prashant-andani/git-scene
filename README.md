@@ -1,20 +1,17 @@
 # git-scene :tada:
 
-Git contribution graph
+Git contribution calendar, authors list and commits count
 
 #### How to Run
 
-Open open.js and set the repo path as below
-`getData(REPO_PATH);`
+`npm i git-scene -S`
+or
+`yarn add git-scene`
 
-`node open.js`
-This creates a json files inside the dashboad/data then the vue project picks those json files to show the dashboard.
+In package.json, add
+`scripts: { git-scene: git-scene }`
 
-### Steps to run dashboard
+Run
+`npm run git-scene`
 
-Inside the dashboard folder
-`npm install` and then
-
-`vue ui`
-
-![Screenshot](https://raw.githubusercontent.com/prashant-andani/git-graph/master/screenshot.png)
+Thats It !!!!
