@@ -205,4 +205,4 @@ const fetchAllCommits = repoPath => {
       console.log('Finished');
     });
 };
-fetchAllCommits('../../code-setup');
+export default fetchAllCommits('./');

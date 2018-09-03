@@ -1,8 +1,8 @@
 {
-  "name": "git-graph",
+  "name": "git-scene",
   "version": "1.0.0",
-  "description": "Code contribution graph",
-  "main": "index.js",
+  "description": "Code contribution graph for every git repo.",
+  "main": "src/index.js",
   "scripts": {
     "lint": "eslint src --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
