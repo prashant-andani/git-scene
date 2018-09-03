@@ -1,4 +1,4 @@
-# git-graph :tada:
+# git-scene :tada:
 
 Git contribution graph
 
