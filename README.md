@@ -2,16 +2,19 @@
 
 Git contribution calendar, authors list and commits count
 
-#### How to Run
+#### Steps to Install
 
 `npm i git-scene -S`
+
 or
+
 `yarn add git-scene`
 
 In package.json, add
-`scripts: { git-scene: git-scene }`
+`scripts: { "git-scene": "git-scene" }`
 
-Run
+### Run
 `npm run git-scene`
 
 Thats It !!!!
+
