@@ -4,7 +4,8 @@ const colors = require('colors/safe');
 const Moment = require('moment');
 const fs = require('fs');
 const CliGhCal = require('cli-gh-cal');
-// const toTimestamp = strDate => Date.parse(strDate);
+const path = require('path');
+
 const getCalendar = data => {
   const cal = Object.entries(data);
   console.log(colors.yellow('-------------------------------------'));
@@ -40,28 +41,9 @@ const getReport = commits => {
     }
     dates[momentDate] += 1;
   }
-  commits[commits.length - 1]
-    .getEntry('README.md')
 
-    .then(entry =>
-      entry.getBlob().then(blob => {
-        blob.entry = entry;
-        return blob;
-      })
-    )
-    // Display information about the blob.
-    .then(blob => {
-      // Show the path, sha, and filesize in bytes.
-      console.log(`${blob.rawsize()}b`);
-      console.log(blob.filemode());
-      // Show a spacer.
-
-      // Show the entire file.
-      // console.log(String(blob));
-    });
   const json = JSON.stringify(dates);
   getCalendar(dates);
-  //  console.log(json);
   fs.writeFile('dashboard/data/commits_count.json', json);
   return obj;
 };
@@ -116,17 +98,12 @@ const generateContribList = commits => {
 const shipCommits = commits => {
   const commitObj = [];
   const commitsLen = commits.length;
-  const commitsToShow = 5;
   for (let i = 0; i < commitsLen; i += 1) {
     const commit = {
       message: commits[i].message(),
       author: commits[i].author().email(),
       date: commits[i].date()
     };
-
-    if (i < commitsToShow) {
-      console.log(`${commit.message} : ${commit.author}`);
-    }
 
     commitObj.push(commit);
   }
@@ -135,40 +112,7 @@ const shipCommits = commits => {
   return commitObj;
 };
 
-const getAllFiles = repo_path => {
-  nodegit.Repository.open(repo_path).then(repo =>
-    repo
-      .getCurrentBranch()
-      .then(ref => repo.getBranchCommit(ref.shorthand()))
-      .then(commits => {
-        // console.log(commit);
-        /* Set up the event emitter and a promise to resolve when it finishes up. */
-        const hist = commits.history();
-
-        const p = new Promise((resolve, reject) => {
-          hist.on('end', resolve);
-          hist.on('error', reject);
-        });
-        hist.start();
-        return p;
-      })
-      .then(commits => commits[18].getTree())
-      .then(tree => {
-        const walker = tree.walk();
-        // console.log('Owner', tree.owner());
-        walker.on('entry', entry => {
-          // console.log(entry.path());
-        });
-        walker.start();
-      })
-      .done()
-  );
-};
-
 const fetchAllCommits = repoPath => {
-  let branchName = '';
-  getAllFiles(repoPath);
-
   nodegit.Repository.open(repoPath)
     .then(repo =>
       repo
@@ -205,4 +149,4 @@ const fetchAllCommits = repoPath => {
       console.log('Finished');
     });
 };
-export default fetchAllCommits('./');
+module.exports = { fetchAllCommits };
