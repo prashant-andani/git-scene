@@ -2,12 +2,14 @@
 
 Git-scene is a CLI tool that provides a stats of any local git repository.
 
-#### What's included
+![Screenshot](https://github.com/prashant-andani/git-scene/blob/master/screenshot.png?raw=true)
+
+#### :eyes: What's included
 * Contribution calendar at project level
 * Total Commits so far, Commit counts by author
 
 
-#### Steps to Install
+#### :wink: Steps to Install
 
 `npm i git-scene -S`
 
@@ -16,14 +18,15 @@ or
 `yarn add git-scene`
 
 In package.json, add
+
 `scripts: { "git-scene": "git-scene" }`
 
 #### Run
 `npm run git-scene`
 
-Thats It !!!!
+:wave: Thats It !!!!
 
-### Contributors
-Prashant Andnai
+### :man: :woman: Contributors
+* Prashant Andani
 
-#### Star, if you like this project
+#### :star: :star: Star, if you like this project, contribute
