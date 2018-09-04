@@ -18,6 +18,7 @@ or
 `yarn add git-scene`
 
 In package.json, add
+
 `scripts: { "git-scene": "git-scene" }`
 
 #### Run
@@ -26,6 +27,6 @@ In package.json, add
 Thats It !!!!
 
 ### Contributors
-Prashant Andani
+* Prashant Andani
 
 #### Star, if you like this project
