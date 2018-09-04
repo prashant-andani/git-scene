@@ -26,6 +26,6 @@ In package.json, add
 Thats It !!!!
 
 ### Contributors
-Prashant Andnai
+Prashant Andani
 
 #### Star, if you like this project
