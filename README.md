@@ -2,6 +2,8 @@
 
 Git-scene is a CLI tool that provides a stats of any local git repository.
 
+![Screenshot](https://github.com/prashant-andani/git-scene/blob/master/screenshot.png?raw=true)
+
 #### What's included
 * Contribution calendar at project level
 * Total Commits so far, Commit counts by author
