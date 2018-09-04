@@ -41,9 +41,9 @@ const getReport = commits => {
     dates[momentDate] += 1;
   }
 
-  const json = JSON.stringify(dates);
+  // const json = JSON.stringify(dates);
   getCalendar(dates);
-  fs.writeFile('dashboard/data/commits_count.json', json);
+  // fs.writeFile('dashboard/data/commits_count.json', json);
   return obj;
 };
 
