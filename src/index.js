@@ -20,7 +20,7 @@ const getCalendar = data => {
   );
 };
 
-const getReport = commits => {
+const getReport = (commits, isUI) => {
   const authors = {};
   const dates = {};
   const obj = {};
@@ -40,10 +40,12 @@ const getReport = commits => {
     }
     dates[momentDate] += 1;
   }
-
-  // const json = JSON.stringify(dates);
   getCalendar(dates);
-  // fs.writeFile('dashboard/data/commits_count.json', json);
+
+  if (isUI) {
+    const json = JSON.stringify(dates);
+    fs.writeFile('dashboard/data/commits_count.json', json);
+  }
   return obj;
 };
 
@@ -67,6 +69,7 @@ const shipDashboardData = (commits, branchName) => {
   };
   const json = JSON.stringify(obj);
   fs.writeFile('dashboard/data/dashboard.json', json);
+
   return obj;
 };
 
@@ -94,7 +97,7 @@ const generateContribList = commits => {
   console.log(colors.yellow('-------------------------------------'));
 };
 
-const shipCommits = commits => {
+const shipCommits = (commits, isUI) => {
   const commitObj = [];
   const commitsLen = commits.length;
   for (let i = 0; i < commitsLen; i += 1) {
@@ -106,17 +109,22 @@ const shipCommits = commits => {
 
     commitObj.push(commit);
   }
-  // const json = JSON.stringify(commitObj);
-  // fs.writeFile('dashboard/data/commits.json', json);
+  if (isUI) {
+    const json = JSON.stringify(commitObj);
+    fs.writeFile('dashboard/data/commits.json', json);
+  }
+
   return commitObj;
 };
 
-const fetchAllCommits = repoPath => {
+const fetchAllCommits = (repoPath, isUI = false) => {
+  let branchName = '';
   nodegit.Repository.open(repoPath)
     .then(repo =>
       repo
         .getCurrentBranch()
         .then(ref => {
+          branchName = ref.shorthand();
           console.log(colors.magenta(`Branch: ${ref.shorthand()}`));
 
           /* Get the commit that the branch points at. */
@@ -134,10 +142,12 @@ const fetchAllCommits = repoPath => {
           return p;
         })
         .then(commits => {
-          getReport(commits);
+          getReport(commits, isUI);
           generateContribList(commits);
-          // shipDashboardData(commits, branchName);
-          shipCommits(commits);
+          shipCommits(commits, isUI);
+          if (isUI) {
+            shipDashboardData(commits, branchName);
+          }
         })
     )
 

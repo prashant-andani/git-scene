@@ -1,7 +1,7 @@
 
 <template>
   <div id="app">
-    <div class="header">Git Repo Dashboard</div>
+    <div class="header">Git Scene</div>
     <div class="dashboard">
       <div>
         <HelloWorld/>
@@ -16,22 +16,22 @@
 </template>
 
 <script>
-import Vue from "vue";
-import VueUi from "@vue/ui";
-import "@vue/ui/dist/vue-ui.css";
-import json from "./../data/dashboard.json";
-import commits_count from "./../data/commits_count.json";
-import commits from "./../data/commits.json";
+import Vue from 'vue';
+import VueUi from '@vue/ui';
+import '@vue/ui/dist/vue-ui.css';
+import json from './../data/dashboard.json';
+import commits_count from './../data/commits_count.json';
+import commits from './../data/commits.json';
 
-import HelloWorld from "./components/HelloWorld.vue";
-import Contributors from "./components/Contributors.vue";
-import CommitHistory from "./components/CommitHistory.vue";
-import Commits from "./components/Commits.vue";
+import HelloWorld from './components/HelloWorld.vue';
+import Contributors from './components/Contributors.vue';
+import CommitHistory from './components/CommitHistory.vue';
+import Commits from './components/Commits.vue';
 
 Vue.use(VueUi);
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
     HelloWorld,
     Contributors,
@@ -50,7 +50,7 @@ export default {
 
 <style>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
