@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <!-- Contributors -->
     <div class="box contributors-list">
       <div class="label">Contributors</div>
