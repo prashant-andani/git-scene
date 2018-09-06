@@ -19,9 +19,9 @@
 import Vue from 'vue';
 import VueUi from '@vue/ui';
 import '@vue/ui/dist/vue-ui.css';
-import json from './../data/dashboard.json';
-import commits_count from './../data/commits_count.json';
-import commits from './../data/commits.json';
+import json from '../data/dashboard.json';
+import commits_count from '../data/commits_count.json';
+import commits from '../data/commits.json';
 
 import HelloWorld from './components/HelloWorld.vue';
 import Contributors from './components/Contributors.vue';

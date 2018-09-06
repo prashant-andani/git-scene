@@ -44,7 +44,7 @@ const getReport = (commits, isUI) => {
 
   if (isUI) {
     const json = JSON.stringify(dates);
-    fs.writeFile('dashboard/data/commits_count.json', json);
+    fs.writeFile('data/commits_count.json', json);
   }
   return obj;
 };
@@ -68,7 +68,7 @@ const shipDashboardData = (commits, branchName) => {
     date: lastCommit.date()
   };
   const json = JSON.stringify(obj);
-  fs.writeFile('dashboard/data/dashboard.json', json);
+  fs.writeFile('data/dashboard.json', json);
 
   return obj;
 };
@@ -111,7 +111,7 @@ const shipCommits = (commits, isUI) => {
   }
   if (isUI) {
     const json = JSON.stringify(commitObj);
-    fs.writeFile('dashboard/data/commits.json', json);
+    fs.writeFile('data/commits.json', json);
   }
 
   return commitObj;
