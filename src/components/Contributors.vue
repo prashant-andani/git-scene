@@ -5,10 +5,14 @@
     <div class="box contributors-list">
       <div class="label">Contributors</div>
       <div class="content contrib-content">
-        
+
         <div class="list">
-          <div class="author" v-for="(count, author) in data" v-bind:key="$index" v-if="author !== ''">
-            <div class="vue-ui-icon"><svg><use xlink:href="#ic_star_24px"></use></svg></div>
+          <div class="author" v-for="(count, author) in data" v-bind:key="author.id" v-if="author !== ''">
+            <div class="vue-ui-icon">
+              <svg>
+                <use xlink:href="#ic_star_24px"></use>
+              </svg>
+            </div>
             {{author}} - {{count}}
           </div>
         </div>
@@ -19,7 +23,7 @@
 
 <script>
 export default {
-  name: "Contributors",
+  name: 'Contributors',
   props: {
     data: Object
   }

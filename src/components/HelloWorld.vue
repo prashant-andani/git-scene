@@ -25,8 +25,8 @@
 
 <script>
 import moment from 'moment';
-import json from './../../data/dashboard.json';
-import commits from './../../data/commits.json';
+import json from '../../data/dashboard.json';
+import commits from '../../data/commits.json';
 
 export default {
   name: 'HelloWorld',

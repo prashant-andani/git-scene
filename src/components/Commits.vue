@@ -6,7 +6,7 @@
       <div class="header-label">Last 10 commits</div>
       <div class="content contrib-content">
         <div class="list">
-          <div v-for="(commit, count) in commits" v-if="count < 10" class="commit" v-bind:key="$index">
+          <div v-for="(commit, count) in commits" v-if="count < 10" class="commit" v-bind:key="commit.id">
             <div>{{commit.message}}</div>
             <div class="label">{{commit.author}}</div>
             <div>{{moment(commit.date).fromNow()}}</div>

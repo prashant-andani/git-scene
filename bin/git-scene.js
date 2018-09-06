@@ -6,7 +6,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const args = process.argv[2];
 const { spawn } = require('child_process');
 
-const { fetchAllCommits } = require('../src/index');
+const { fetchAllCommits } = require('../cli/index');
 
 function runDashboard() {
   const ls = spawn('npm', ['run', 'ui']);

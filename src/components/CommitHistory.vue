@@ -1,28 +1,24 @@
-
-
-<template>
-  <div class="box contributors-list">
-    <div class="label">Commit History</div>
-    <div class="commit-history">        
-      <line-chart :data="data"></line-chart>
-    </div>
-  </div>
-</template>
-
 <script>
-import Vue from "vue";
-import VueChartkick from "vue-chartkick";
-import Chart from "chart.js";
+import Vue from 'vue';
+import VueChartkick from 'vue-chartkick';
+import Chart from 'chart.js';
 
 Vue.use(VueChartkick, { adapter: Chart });
 export default {
-  name: "CommitHistory",
+  name: 'CommitHistory',
   props: {
     data: Object
   }
 };
 </script>
-
+<template>
+  <div class="box contributors-list">
+    <div class="label">Commit History</div>
+    <div class="commit-history">
+      <line-chart :data="data"></line-chart>
+    </div>
+  </div>
+</template>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .box {
