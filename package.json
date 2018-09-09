@@ -17,6 +17,8 @@
     "blessed-contrib": "^4.8.6",
     "chalk": "^2.4.1",
     "cli-gh-cal": "^1.4.9",
+    "express": "^4.16.3",
+    "moment": "^2.22.2",
     "nodegit": "^0.22.2",
     "promise": "^8.0.1"
   },

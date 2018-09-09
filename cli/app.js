@@ -1,7 +1,10 @@
 const nodegit = require('nodegit');
 const Promise = require('promise');
+const express = require('express');
+const Moment = require('moment');
 const fs = require('fs');
 const CliGhCal = require('cli-gh-cal');
+const _ = require('lodash');
 
 function reverseObject(object) {
   var newObject = {};
