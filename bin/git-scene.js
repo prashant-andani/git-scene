@@ -3,19 +3,22 @@
 // Set the env before any code reads it
 process.env.BABEL_ENV = process.env.BABEL_ENV || 'development';
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-const args = process.argv[2];
+const express = require('express');
 const { spawn } = require('child_process');
+const path = require('path');
 
+const args = process.argv[2];
 const { fetchAllCommits } = require('../cli/index');
 
 function runDashboard() {
-  const ls = spawn('npm', ['run', 'ui']);
+  const ls = spawn('node', ['cli/app.js']);
+
   ls.stdout.on('data', data => {
-    console.log(`${data}`);
+    console.log(`stdout: ${data}`);
   });
 
   ls.stderr.on('data', data => {
-    console.log(`${data}`);
+    console.log(`stderr: ${data}`);
   });
 
   ls.on('close', code => {
@@ -23,8 +26,8 @@ function runDashboard() {
   });
 }
 if (args === '--ui') {
-  fetchAllCommits('./', true);
   runDashboard();
+  //fetchAllCommits('./', true);
 } else {
-  fetchAllCommits('./', false);
+  //fetchAllCommits('./', false);
 }
