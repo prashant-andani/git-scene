@@ -1,7 +1,5 @@
-/dashaboard/data
 /node_modules
 .DS_Store
-node_modules
 /dist
 /data/commits_count.json
 /data/commits.json
