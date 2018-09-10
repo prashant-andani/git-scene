@@ -5,7 +5,6 @@
 <img height="80" width="80" alt="giraffe" src="https://raw.githubusercontent.com/prashant-andani/git-scene/master/assets/giraffe.png" />
 </a>
 
-<<<<<<< HEAD
 [![MIT License][license-badge]][license]
 [![All Contributors](https://img.shields.io/badge/all_contributors-0-orange.svg?style=flat-square)](#contributors)
 [![PRs Welcome][prs-badge]][prs]
@@ -14,7 +13,6 @@
 [![Code of Conduct][coc-badge]][coc]
 ![Screenshot](https://github.com/prashant-andani/git-scene/blob/master/screenshot.png?raw=true)
 
-=======
 <p>Git-scene is a CLI tool that provides a stats of any local git repository.</p>
 </div>
 
