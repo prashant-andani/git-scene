@@ -14,6 +14,7 @@
 [![Code of Conduct][coc-badge]][coc]
 [![downloads][downloads-badge]][npmtrends]
 [![MIT License][license-badge]][license]
+
 [![Watch on GitHub][github-watch-badge]][github-watch]
 [![Star on GitHub][github-star-badge]][github-star]
 [![Tweet][twitter-badge]][twitter]
