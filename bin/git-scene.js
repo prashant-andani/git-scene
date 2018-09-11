@@ -9,7 +9,7 @@ const path = require('path');
 const args = process.argv[2];
 
 function runDashboard() {
-  const ls = spawn('node', ['cli/server.js']);
+  const ls = spawn('node', ['node_modules/git-scene/cli/server.js']);
 
   ls.stdout.on('data', data => {
     console.log(`stdout: ${data}`);
