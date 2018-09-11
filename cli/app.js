@@ -1,26 +1,25 @@
 const nodegit = require('nodegit');
 const Promise = require('promise');
-const express = require('express');
 const Moment = require('moment');
 const fs = require('fs');
 const CliGhCal = require('cli-gh-cal');
 const _ = require('lodash');
 
 function reverseObject(object) {
-  var newObject = {};
-  var keys = [];
-  for (var key in object) {
+  const newObject = {};
+  const keys = [];
+  for (let key in object) {
     keys.push(key);
   }
-  for (var i = keys.length - 1; i >= 0; i--) {
-    var value = object[keys[i]];
+  for (let i = keys.length - 1; i >= 0; i--) {
+    let value = object[keys[i]];
     newObject[keys[i]] = value;
   }
-
   return newObject;
 }
 
-const repoPath = './';
+const REPO_PATH = './';
+
 const getCalendar = data => {
   const cal = Object.entries(data);
 
@@ -30,8 +29,9 @@ const getCalendar = data => {
     end: new Moment()
   });
 };
+
 const getConfig = () => {
-  return nodegit.Repository.open(repoPath)
+  return nodegit.Repository.open(REPO_PATH)
     .then(function(repository) {
       return repository.config();
     })
@@ -43,7 +43,7 @@ const getConfig = () => {
 const getReport = () => {
   const authors = {};
   const dates = {};
-  return nodegit.Repository.open(repoPath).then(repo =>
+  return nodegit.Repository.open(REPO_PATH).then(repo =>
     repo
       .getCurrentBranch()
       .then(ref => {
@@ -110,7 +110,7 @@ const shipDashboardData = (commits, branchName) => {
 };
 
 const getCurrentBranch = () => {
-  return nodegit.Repository.open(repoPath).then(repo =>
+  return nodegit.Repository.open(REPO_PATH).then(repo =>
     repo.getCurrentBranch().then(ref => {
       /* Get the commit that the branch points at. */
       return ref.shorthand();
@@ -119,7 +119,7 @@ const getCurrentBranch = () => {
 };
 
 const getFilesCommitCount = async () => {
-  return nodegit.Repository.open(repoPath).then(repo =>
+  return nodegit.Repository.open(REPO_PATH).then(repo =>
     repo
       .getCurrentBranch()
       .then(ref => {
@@ -158,8 +158,9 @@ const getFilesCommitCount = async () => {
       })
   );
 };
+
 const getContribList = () => {
-  return nodegit.Repository.open(repoPath).then(repo =>
+  return nodegit.Repository.open(REPO_PATH).then(repo =>
     repo
       .getCurrentBranch()
       .then(ref => {
@@ -194,7 +195,7 @@ const getContribList = () => {
 };
 
 const getAllCommits = () => {
-  return nodegit.Repository.open(repoPath).then(repo =>
+  return nodegit.Repository.open(REPO_PATH).then(repo =>
     repo
       .getCurrentBranch()
       .then(ref => {
