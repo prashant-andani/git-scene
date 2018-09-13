@@ -1,0 +1,44 @@
+{
+  "name": "dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-eslint": "^9.0.0",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-config-react": "^1.1.7",
+    "husky": "^0.14.3",
+    "lint-staged": "^7.2.2",
+    "prettier": "^1.14.2",
+    "prop-types": "^15.6.2",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
+    "react-redux": "^5.0.7",
+    "react-scripts": "1.1.5",
+    "redux-saga": "^0.16.0"
+  },
+  "lint-staged": {
+    "unstaged": true,
+    "src/**/*.{js,jsx,json,css,md}": [
+      "eslint --fix src",
+      "prettier",
+      "git add"
+    ]
+  },
+  "scripts": {
+    "lint": "eslint --fix src",
+    "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "start-js": "react-scripts start",
+    "start": "npm-run-all -p watch-css start-js",
+    "build-js": "react-scripts build",
+    "build": "npm-run-all build-css build-js",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "cosmos": "cosmos",
+    "cosmos:export": "cosmos-export",
+    "precommit": "lint-staged"
+  }
+}
