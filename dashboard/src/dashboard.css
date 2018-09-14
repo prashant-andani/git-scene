@@ -1,0 +1,8 @@
+.dashboard-container {
+  margin: 20px; }
+  .dashboard-container .counters {
+    justify-content: center;
+    display: flex; }
+  .dashboard-container .cards {
+    justify-content: center;
+    display: flex; }
