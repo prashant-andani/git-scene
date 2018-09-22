@@ -1,0 +1,15 @@
+.header {
+  width: 1440px;
+  height: 75px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px 0 rgba(203, 191, 211, 0.1); }
+  .header .git-scene-logo {
+    display: flex;
+    align-items: center;
+    width: 200px;
+    background-image: -o-linear-gradient(168deg, #654080, #46477f);
+    padding: 6px;
+    color: black;
+    font-size: 22px; }
+    .header .git-scene-logo img {
+      width: 61px; }

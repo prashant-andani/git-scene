@@ -1,0 +1,27 @@
+@import url(../../style/main.css);
+.size-md {
+  width: 500px; }
+
+.card-container {
+  display: block;
+  margin: 10px;
+  height: 100%;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px 0 rgba(124, 106, 132, 0.05);
+  background-color: #ffffff;
+  border: solid 1px #e6eaee; }
+  .card-container .title {
+    padding: 10px 0px 0px 25px;
+    height: 24px;
+    font-family: roboto-regular;
+    font-size: 18px;
+    line-height: 1.5;
+    letter-spacing: -0.2px;
+    color: #2a3950; }
+  .card-container .card-body {
+    padding: 20px; }
+  .card-container .content {
+    font-family: roboto-regular;
+    font-size: 36px;
+    text-align: center;
+    color: #2a3950; }

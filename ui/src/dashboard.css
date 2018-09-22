@@ -1,0 +1,61 @@
+.dashboard-container {
+  margin: 5px;
+  /* the container must be positioned relative:*/
+  /*style the arrow inside the select element:*/
+  /*point the arrow upwards when the select box is open (active):*/
+  /*style the items (options), including the selected item:*/
+  /*style items (options):*/
+  /*hide the items when the select box is closed:*/ }
+  .dashboard-container .counters {
+    justify-content: center;
+    display: flex; }
+  .dashboard-container .cards {
+    justify-content: center;
+    display: flex; }
+  .dashboard-container table {
+    border-collapse: collapse; }
+    .dashboard-container table td {
+      padding: 10px; }
+    .dashboard-container table th {
+      text-align: left;
+      padding: 10px; }
+  .dashboard-container tbody tr {
+    border-top: 1px solid #e6eaee;
+    font-family: roboto-regular; }
+  .dashboard-container .custom-select {
+    position: relative; }
+  .dashboard-container .custom-select select {
+    display: none;
+    /*hide original SELECT element:*/ }
+  .dashboard-container .select-selected {
+    background-color: DodgerBlue; }
+  .dashboard-container .select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent; }
+  .dashboard-container .select-selected.select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px; }
+  .dashboard-container .select-items div, .dashboard-container .select-selected {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    user-select: none; }
+  .dashboard-container .select-items {
+    position: absolute;
+    background-color: DodgerBlue;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 99; }
+  .dashboard-container .select-hide {
+    display: none; }
+  .dashboard-container .select-items div:hover, .dashboard-container .same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1); }

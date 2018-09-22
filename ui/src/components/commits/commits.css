@@ -1,0 +1,16 @@
+.commitList {
+  overflow-y: scroll;
+  height: 500px; }
+
+.commit {
+  padding: 10px;
+  border-bottom: 1px solid #e6eaee;
+  font-family: roboto-regular; }
+
+.commit-date {
+  float: right;
+  font-size: 12.5px; }
+
+.grey-text {
+  color: #48576b;
+  font-size: 13.5px; }

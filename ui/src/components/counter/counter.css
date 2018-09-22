@@ -1,0 +1,24 @@
+@import url(../../style/main.css);
+.counter-content {
+  margin: 10px 15px 15px 15px;
+  width: 278px;
+  height: 120px;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px 0 rgba(124, 106, 132, 0.05);
+  background-color: #ffffff;
+  border: solid 1px #e6eaee; }
+  .counter-content .title {
+    height: 24px;
+    font-family: roboto-regular;
+    opacity: 0.5;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: -0.2px;
+    text-align: center;
+    color: #2a3950; }
+  .counter-content .counter {
+    padding: 10px 5px 5px 10px;
+    font-family: roboto-regular;
+    font-size: 45px;
+    text-align: center;
+    color: #2a3950; }
