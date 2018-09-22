@@ -4,7 +4,6 @@
 process.env.BABEL_ENV = process.env.BABEL_ENV || 'development';
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 const { spawn } = require('child_process');
-const path = require('path');
 const { commitFiles } = require('../cli/app');
 
 const args = process.argv[2];
@@ -24,7 +23,7 @@ function runServer() {
   });
 }
 function runDashboard() {
-  const ls = spawn('node', ['cli/client.js']);
+  const ls = spawn('node', ['node_modules/git-scene/cli/client.js']);
 
   ls.stdout.on('data', data => {
     console.log(`stdout: ${data}`);
@@ -42,5 +41,6 @@ if (args === '--ui') {
   runDashboard();
   runServer();
 } else {
-  commitFiles();
+  runDashboard();
+  runServer();
 }
