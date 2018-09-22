@@ -1,9 +1,5 @@
 /node_modules
 .DS_Store
-/dist
-/data/commits_count.json
-/data/commits.json
-/data/dashboard.json
 
 # local env files
 .env.local
