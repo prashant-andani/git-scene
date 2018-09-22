@@ -23,6 +23,7 @@
     "moment": "^2.22.2",
     "morgan": "^1.9.1",
     "nodegit": "^0.22.2",
+    "nodegit-kit": "^0.19.0",
     "promise": "^8.0.1"
   },
   "devDependencies": {
