@@ -5,13 +5,13 @@ const renderAuthors = data => {
   return Object.keys(data).map(author => (
     <tr>
       <td>{author}</td>
-      <td>{data[author]}</td>
+      <td className="count">{data[author]}</td>
     </tr>
   ));
 };
 const Authors = props => {
   return (
-    <div>
+    <div className="authors-list">
       <table>
         <thead>
           <tr>

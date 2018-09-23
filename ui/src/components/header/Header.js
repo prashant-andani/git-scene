@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
 import './header.css';
 import logo from '../../assets/giraffe.png';
 
@@ -17,4 +19,7 @@ Header.propTypes = {};
 
 Header.defaultProps = {};
 
-export default Header;
+const mapStateToProps = state => ({
+  dashboard: state.dashboard
+});
+export default connect(mapStateToProps)(Header);

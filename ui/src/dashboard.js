@@ -94,16 +94,16 @@ class Dashboard extends React.Component {
             </select>
             <LineChart data={commitHistory} download={true} />
           </Card>
-          <Card title="Contributions">
-            <Authors data={authors} />
-          </Card>
-          <Card title="Commits" className="size-md">
-            <Commits data={commits} />
+          <Card className="size-md" title="Commits Share">
+            <PieChart data={authors} />
           </Card>
         </div>
         <div className="cards">
-          <Card className="size-md" title="Commits Share">
-            <PieChart data={authors} />
+          <Card title="Commits" className="size-lg">
+            <Commits data={commits} />
+          </Card>
+          <Card title="Contributions" className="size-sm">
+            <Authors data={authors} />
           </Card>
         </div>
       </div>

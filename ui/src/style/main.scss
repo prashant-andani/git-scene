@@ -5,27 +5,42 @@
 
 @font-face {
   @include font-style;
-  font-family: 'roboto-regular';
-  src: url('/fonts/Roboto-Regular.ttf');
+  font-family: 'lato-regular';
+  src: url('/fonts/Lato-Regular.ttf');
 }
 
 @font-face {
   @include font-style;
-  font-family: 'roboto-light';
-  src: url('/fonts/Roboto-Light.ttf');
+  font-family: 'lato-bold';
+  src: url('/fonts/Lato-Bold.ttf');
 }
 
 @font-face {
   @include font-style;
-  font-family: 'roboto-medium';
-  src: url('/fonts/Roboto-Medium.ttf');
+  font-family: 'lato-light';
+  src: url('/fonts/Lato-Light.ttf');
+}
+
+@font-face {
+  @include font-style;
+  font-family: 'lato-medium';
+  src: url('/fonts/Lato-Medium.ttf');
 }
 
 body {
-  font-family: 'roboto-light', serif;
+  font-family: 'lato-regular';
   box-sizing: border-box;
   max-width: 1440px;
   margin: 0 auto;
   position: relative;
   overflow-x: hidden;
+}
+.size-md {
+  width: 50%;
+}
+.size-lg {
+  width: 65%;
+}
+.size-sm {
+  width: 35%;
 }

@@ -1,5 +1,6 @@
 @import url(../../style/main.css);
 .counter-content {
+  font-family: lato-regular;
   margin: 10px 15px 15px 15px;
   width: 278px;
   height: 120px;
@@ -9,7 +10,7 @@
   border: solid 1px #e6eaee; }
   .counter-content .title {
     height: 24px;
-    font-family: roboto-regular;
+    font-family: lato-medium;
     opacity: 0.5;
     font-size: 16px;
     line-height: 1.5;
@@ -18,7 +19,7 @@
     color: #2a3950; }
   .counter-content .counter {
     padding: 10px 5px 5px 10px;
-    font-family: roboto-regular;
+    font-family: lato-bold;
     font-size: 45px;
     text-align: center;
     color: #2a3950; }

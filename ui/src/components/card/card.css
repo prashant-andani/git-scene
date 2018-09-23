@@ -1,8 +1,6 @@
 @import url(../../style/main.css);
-.size-md {
-  width: 500px; }
-
 .card-container {
+  font-family: lato-regular;
   display: block;
   margin: 10px;
   height: 100%;
@@ -11,17 +9,18 @@
   background-color: #ffffff;
   border: solid 1px #e6eaee; }
   .card-container .title {
+    font-family: lato-bold;
     padding: 10px 0px 0px 25px;
     height: 24px;
-    font-family: roboto-regular;
-    font-size: 18px;
+    font-size: 21px;
     line-height: 1.5;
     letter-spacing: -0.2px;
     color: #2a3950; }
   .card-container .card-body {
+    font-family: lato-regular;
     padding: 20px; }
   .card-container .content {
-    font-family: roboto-regular;
+    font-family: lato-regular;
     font-size: 36px;
     text-align: center;
     color: #2a3950; }
