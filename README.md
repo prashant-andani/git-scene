@@ -36,6 +36,8 @@ or
 
 `yarn add git-scene`
 
+use `sudo` if permission issue
+
 In package.json, add
 
 `scripts: { "git-scene": "git-scene" }`
