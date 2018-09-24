@@ -5,7 +5,7 @@
 <img height="80" width="80" alt="giraffe" src="https://raw.githubusercontent.com/prashant-andani/git-scene/master/assets/giraffe.png" />
 </a>
 
-<p>Git-scene is a tool that provides a stats of any local git repository.</p>
+<p>Git-scene is a tool that provides a stats for any local git repository.</p>
 </div>
 
 <hr />
