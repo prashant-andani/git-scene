@@ -1,9 +1,11 @@
 @import url(../../style/main.css);
 .counter-content {
   font-family: lato-regular;
+  text-align: center;
   margin: 10px 15px 15px 15px;
+  padding-top: 10px;
   width: 278px;
-  height: 120px;
+  height: 186px;
   border-radius: 6px;
   box-shadow: 0 2px 10px 0 rgba(124, 106, 132, 0.05);
   background-color: #ffffff;
@@ -23,3 +25,8 @@
     font-size: 45px;
     text-align: center;
     color: #2a3950; }
+  .counter-content .sub-content {
+    margin-top: 10px; }
+  .counter-content .line {
+    margin: 15px;
+    border: 1px solid #d9dde1; }

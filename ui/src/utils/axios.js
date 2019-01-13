@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-const _ajax = ({ method, url, data = {} }) => {
-  return axios({ method, url, data })
+const _ajax = ({ method, url, data = {} }) =>
+  axios({ method, url, data })
     .then(response => response)
     .catch(error => error.response);
-};
 
 const postData = (url, data) => _ajax({ method: 'post', url, data });
 

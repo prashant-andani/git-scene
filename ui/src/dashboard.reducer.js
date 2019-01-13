@@ -4,7 +4,8 @@ const initialState = {
   commits: [],
   branchName: '',
   authors: {},
-  commitHistory: {}
+  commitHistory: {},
+  filesList: {}
 };
 
 const dashboard = (state = initialState, action) => {
@@ -24,6 +25,10 @@ const dashboard = (state = initialState, action) => {
     }
     case ACTIONS.DASHBOARD.AUTHORS: {
       tempState.authors = action.response;
+      return tempState;
+    }
+    case ACTIONS.DASHBOARD.FILES_COMMIT_COUNT: {
+      tempState.filesList = action.response;
       return tempState;
     }
 

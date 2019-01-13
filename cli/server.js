@@ -1,16 +1,24 @@
 const express = require('express');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 
 const {
   getCurrentBranch,
   getContribList,
   getAllCommits,
   getReport,
-  commitFiles
+  commitFiles,
+  getFilesCommitCount,
+  getAuthorStats
 } = require('./app');
 
 const app = express();
 const PORT = 8008;
+
+// configure app to use bodyParser()
+// this will let us get the data from a POST
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 // Setup logger
 app.use((req, res, next) => {
@@ -25,9 +33,9 @@ app.use((req, res, next) => {
   next();
 });
 
-// respond with "hello world" when a GET request is made to the homepage
 app.get('/getCurrentBranch', (req, res) => {
   getCurrentBranch().then(branchName => {
+    console.log(branchName);
     res.send(JSON.stringify({ branchName }));
   });
 });
@@ -43,8 +51,9 @@ app.get('/getAllCommits', (req, res) => {
     res.send(JSON.stringify(data));
   });
 });
-app.get('/getCommitHistory/:author', (req, res) => {
-  getReport(req.params.author).then(data => {
+app.post('/getCommitHistory', (req, res) => {
+  const { author, duration } = req.body;
+  getReport(author, duration).then(data => {
     res.send(JSON.stringify(data));
   });
 });
@@ -53,6 +62,17 @@ app.get('/commitFiles', (req, res) => {
     res.send(JSON.stringify(data));
   });
 });
+app.get('/getFilesCommitCount', (req, res) => {
+  getFilesCommitCount().then(data => {
+    res.send(JSON.stringify(data));
+  });
+});
+app.get('/getAuthorStats', (req, res) => {
+  getAuthorStats().then(data => {
+    res.send(JSON.stringify(data));
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`API Server Running at: http://localhost:${PORT}`);
 });
