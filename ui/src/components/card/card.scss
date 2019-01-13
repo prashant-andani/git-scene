@@ -10,24 +10,28 @@
   border: solid 1px #e6eaee;
   
   .title {
-    font-family: lato-bold;
-    padding: 10px 0px 0px 25px;
-    height: 24px;
+    font-family: lato-medium;
+    padding: 10px 0px 0px 13px;
+    height: 40px;
     font-size: 21px;
     line-height: 1.5;
     letter-spacing: -0.2px;
-    color: #2a3950;
+    color: #000000;
+    background: #fafcff;
+    border-bottom: 1px solid #e6eaee;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
   }
   .card-body {
     font-family: lato-regular;
-    padding: 20px; 
+    padding: 10px;
   }
   
   .content {
     font-family: lato-regular;
     font-size: 36px;
     text-align: center;
-    color: #2a3950;
+    color: #000;
   }
 }
 

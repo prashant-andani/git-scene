@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Card } from 'antd';
 
 const renderAuthors = data => {
   return Object.keys(data).map(author => (
@@ -11,17 +12,19 @@ const renderAuthors = data => {
 };
 const Authors = props => {
   return (
-    <div className="authors-list">
-      <table>
-        <thead>
-          <tr>
-            <th>Author</th>
-            <th>Commits</th>
-          </tr>
-        </thead>
-        <tbody>{renderAuthors(props.data)}</tbody>
-      </table>
-    </div>
+    <Card title="Contributions" extra={<a href="#" />} style={{ width: 300 }}>
+      <div className="authors-list">
+        <table>
+          <thead>
+            <tr>
+              <th>Author</th>
+              <th>Commits</th>
+            </tr>
+          </thead>
+          <tbody>{renderAuthors(props.data)}</tbody>
+        </table>
+      </div>
+    </Card>
   );
 };
 

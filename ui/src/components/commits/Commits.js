@@ -2,22 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'moment';
 import './commits.css';
+import { Card, Tooltip, Timeline } from 'antd';
+import { getCommitFiles } from '../../dashboard.saga';
 
 const Commits = props => {
   const renderDate = date => Moment(date).format('Do MMM, YY');
 
-  const commitList = props.data.map(commit => {
-    return (
-      <div className="commit">
-        {commit.message}
-        <div className="grey-text">
-          {commit.author}
-          <span className="commit-date">{renderDate(commit.date)}</span>
-        </div>
-      </div>
+  const renderCommits = commits =>
+    commits.map(commit =>
+      commit.message.includes('pull') ? (
+        <Tooltip placement="topLeft" title={commit.author}>
+          <Timeline.Item color="green">
+            {commit.message} - {renderDate(commit.date)}
+          </Timeline.Item>
+        </Tooltip>
+      ) : (
+        <Tooltip placement="topLeft" title={commit.author}>
+          <Timeline.Item>
+            {commit.message} - {renderDate(commit.date)}
+          </Timeline.Item>
+        </Tooltip>
+      )
     );
-  });
-  return <div className="commitList">{commitList}</div>;
+  return (
+    <Card title="Commits" bordered={false} extra={<a href="#" />}>
+      <Timeline>{renderCommits(props.data)}</Timeline>
+    </Card>
+  );
 };
 
 Commits.propTypes = {};

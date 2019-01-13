@@ -1,6 +1,6 @@
 {
   "name": "git-scene",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "description": "Code contribution graph for every git repo.",
   "main": "cli/index.js",
   "bin": {
@@ -17,13 +17,13 @@
   "dependencies": {
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.6",
+    "body-parser": "^1.18.3",
     "chalk": "^2.4.1",
     "cli-gh-cal": "^1.4.9",
     "express": "^4.16.3",
     "moment": "^2.22.2",
     "morgan": "^1.9.1",
-    "nodegit": "^0.22.2",
-    "nodegit-kit": "^0.19.0",
+    "nodegit": "^0.23.0",
     "promise": "^8.0.1"
   },
   "devDependencies": {

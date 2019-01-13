@@ -2,13 +2,16 @@ const nodegit = require('nodegit');
 
 const Promise = require('promise');
 const Moment = require('moment');
-const fs = require('fs');
 const CliGhCal = require('cli-gh-cal');
 const _ = require('lodash');
+
+console.log('cwd');
+console.log(process.cwd());
+
 function reverseObject(object) {
   const newObject = {};
   const keys = [];
-  for (let key in object) {
+  for (const key in object) {
     keys.push(key);
   }
   for (let i = keys.length - 1; i >= 0; i -= 1) {
@@ -18,7 +21,7 @@ function reverseObject(object) {
   return newObject;
 }
 
-const REPO_PATH = './';
+const REPO_PATH = '../tekagogo-monorepo';
 
 const getCalendar = data => {
   const cal = Object.entries(data);
@@ -35,14 +38,14 @@ const getConfig = () =>
     .then(repository => repository.config())
     .then(config => config.getStringBuf('user.name'));
 
-const commitFiles = async () => {
-  return nodegit.Repository.open(REPO_PATH).then(repo =>
+const commitFiles = async () =>
+  nodegit.Repository.open(REPO_PATH).then(repo =>
     repo
       .getCurrentBranch()
-      .then(ref => {
+      .then(ref =>
         /* Get the commit that the branch points at. */
-        return repo.getBranchCommit(ref.shorthand());
-      })
+        repo.getBranchCommit(ref.shorthand())
+      )
       .then(commit => {
         /* Set up the event emitter and a promise to resolve when it finishes up. */
         const hist = commit.history();
@@ -56,22 +59,13 @@ const commitFiles = async () => {
         return p;
       })
       .then(async commits => {
-        let promise1 = '';
-        let promise2 = '';
-
         let promise3 = '';
 
-        promise1 = commits.map(async commit => {
+        commits.map(async commit => {
           commit.getDiff().then(async arrayDiff => {
-            promise2 = arrayDiff.map(async diff => {
+            arrayDiff.map(async diff => {
               diff.patches().then(async patches => {
-                promise3 = patches.map(async patch => {
-                  // if (!mostCommitFiles[patch.newFile().path()]) {
-                  //   mostCommitFiles[patch.oldFile().path()] = 0;
-                  // }
-                  // return (mostCommitFiles[patch.oldFile().path()] += 1);
-                  return patch.newFile().path();
-                });
+                promise3 = patches.map(async patch => patch.newFile().path());
                 const promise3Result = await Promise.all(promise3);
                 return promise3Result;
               });
@@ -85,17 +79,15 @@ const commitFiles = async () => {
         return results;
       })
   );
-};
 
-const getReport = authorEmail => {
+const getReport = (authorEmail, duration) => {
   const authors = {};
   const dates = {};
+
   return nodegit.Repository.open(REPO_PATH).then(repo =>
     repo
       .getCurrentBranch()
-      .then(ref => {
-        return repo.getBranchCommit(ref.shorthand());
-      })
+      .then(ref => repo.getBranchCommit(ref.shorthand()))
       .then(commit => {
         /* Set up the event emitter and a promise to resolve when it finishes up. */
         const hist = commit.history();
@@ -121,66 +113,43 @@ const getReport = authorEmail => {
           authors[author] += 1;
           // commits by date
           const date = commits[i].date();
-          const momentDate = Moment(date)
-            .format('YYYY-MM-DD')
-            .toString();
-          if (author === 'all') {
-            // include all commits
-            if (!dates[momentDate]) {
-              dates[momentDate] = 0;
+          const momentDate = Moment(date).format('YYYY-MM-DD');
+          if (
+            momentDate >= duration &&
+            momentDate <= Moment().format('YYYY-MM-DD')
+          ) {
+            if (author === 'all') {
+              // include all commits
+              if (!dates[momentDate]) {
+                dates[momentDate] = 0;
+              }
+              dates[momentDate] += 1;
+            } else if (commits[i].author().email() === author) {
+              if (!dates[momentDate]) {
+                dates[momentDate] = 0;
+              }
+              dates[momentDate] += 1;
             }
-            dates[momentDate] += 1;
-          } else if (commits[i].author().email() === author) {
-            if (!dates[momentDate]) {
-              dates[momentDate] = 0;
-            }
-            dates[momentDate] += 1;
           }
         }
-
         return reverseObject(dates);
       })
   );
 };
 
-const shipDashboardData = (commits, branchName) => {
-  const obj = { totalCommits: commits.length, branch: branchName };
-  const authors = {};
-  for (let i = 0; i < commits.length; i += 1) {
-    const author = commits[i].author().email();
-    if (!authors[author]) {
-      authors[author] = 0;
-    }
-    authors[author] += 1;
-  }
-  obj.authors = authors;
-  const lastCommit = commits[0];
-
-  obj.lastCommit = {
-    message: lastCommit.message(),
-    author: lastCommit.author().email(),
-    date: lastCommit.date()
-  };
-
-  const json = JSON.stringify(obj);
-  fs.writeFile('data/dashboard.json', json);
-
-  return obj;
-};
-
 const getCurrentBranch = () =>
-  nodegit.Repository.open(REPO_PATH).then(repo =>
-    repo.getCurrentBranch().then(ref => ref.shorthand())
-  );
+  nodegit.Repository.open(REPO_PATH).then(repo => {
+    console.log('repo');
+    return repo.getCurrentBranch().then(ref => ref.shorthand());
+  });
 
-const getFilesCommitCount = async () => {
-  return nodegit.Repository.open(REPO_PATH).then(repo =>
+const getAuthorStats = async () => {
+  const fileStats = { added: 0, deleted: 0, modified: 0 };
+  const dates = {};
+  const allFiles = nodegit.Repository.open(REPO_PATH).then(repo =>
     repo
       .getCurrentBranch()
-      .then(ref => {
-        /* Get the commit that the branch points at. */
-        return repo.getBranchCommit(ref.shorthand());
-      })
+      .then(ref => repo.getBranchCommit(ref.shorthand()))
       .then(commit => {
         /* Set up the event emitter and a promise to resolve when it finishes up. */
         const hist = commit.history();
@@ -193,35 +162,109 @@ const getFilesCommitCount = async () => {
         hist.start();
         return p;
       })
-      .then(async commits => {
-        const mostCommitFiles = {};
-        commits.map(commit => {
-          commit.getDiff().then(async arrayDiff => {
-            return arrayDiff.map(diff => {
-              diff.patches().then(async patches => {
-                return patches.map(patch => {
-                  if (!mostCommitFiles[patch.newFile().path()]) {
-                    mostCommitFiles[patch.oldFile().path()] = 0;
+      .then(commits => {
+        const results = commits.map(async commit =>
+          commit.getDiff().then(arrayDiff => {
+            const date = commit.date();
+            const momentDate = Moment(date).format('YYYY-MM-DD');
+            const diffRe = arrayDiff.map(async diff =>
+              diff.patches().then(patches => {
+                const patchRe = patches.map(async patch => {
+                  if (!dates[momentDate]) {
+                    dates[momentDate] = { added: 0, deleted: 0, modified: 0 };
                   }
-                  return (mostCommitFiles[patch.oldFile().path()] += 1);
+                  if (patch.isAdded()) {
+                    dates[momentDate].added += 1;
+                  } else if (patch.isDeleted()) {
+                    dates[momentDate].deleted += 1;
+                  } else if (patch.isModified()) {
+                    dates[momentDate].modified += 1;
+                  }
+                  return patch.lineStats();
                 });
-              });
-            });
-          });
-        });
-        return mostCommitFiles;
+                return Promise.all(patchRe);
+              })
+            );
+            return Promise.all(diffRe);
+          })
+        );
+        return Promise.all(results);
       })
   );
+  return allFiles.then(files => {
+    const stringFiles = String(files).replace(/[[\]']+/g, '');
+
+    const filesArray = stringFiles.split(',');
+    const filesObj = {};
+    for (let i = 0; i < filesArray.length; i += 1) {
+      const file = filesArray[i];
+      if (filesObj[file] === undefined) {
+        filesObj[file] = 0;
+      } else {
+        filesObj[file] += 1;
+      }
+    }
+    console.log(dates);
+    return dates;
+  });
 };
 
-const getContribList = () => {
-  return nodegit.Repository.open(REPO_PATH).then(repo =>
+const getFilesCommitCount = async () => {
+  const allFiles = nodegit.Repository.open(REPO_PATH).then(repo =>
     repo
       .getCurrentBranch()
-      .then(ref => {
-        /* Get the commit that the branch points at. */
-        return repo.getBranchCommit(ref.shorthand());
+      .then(ref => repo.getBranchCommit(ref.shorthand()))
+      .then(commit => {
+        /* Set up the event emitter and a promise to resolve when it finishes up. */
+        const hist = commit.history();
+
+        const p = new Promise((resolve, reject) => {
+          hist.on('end', resolve);
+          hist.on('error', reject);
+        });
+
+        hist.start();
+        return p;
       })
+      .then(commits => {
+        const results = commits.map(async commit =>
+          commit.getDiff().then(arrayDiff => {
+            const diffRe = arrayDiff.map(async diff =>
+              diff.patches().then(patches => {
+                const patchRe = patches.map(async patch =>
+                  patch.oldFile().path()
+                );
+                return Promise.all(patchRe);
+              })
+            );
+            return Promise.all(diffRe);
+          })
+        );
+        return Promise.all(results);
+      })
+  );
+  return allFiles.then(files => {
+    const stringFiles = String(files).replace(/[[\]']+/g, '');
+
+    const filesArray = stringFiles.split(',');
+    const filesObj = {};
+    for (let i = 0; i < filesArray.length; i += 1) {
+      const file = filesArray[i];
+      if (filesObj[file] === undefined) {
+        filesObj[file] = 0;
+      } else {
+        filesObj[file] += 1;
+      }
+    }
+    return filesObj;
+  });
+};
+
+const getContribList = () =>
+  nodegit.Repository.open(REPO_PATH).then(repo =>
+    repo
+      .getCurrentBranch()
+      .then(ref => repo.getBranchCommit(ref.shorthand()))
       .then(commit => {
         /* Set up the event emitter and a promise to resolve when it finishes up. */
         const hist = commit.history();
@@ -239,7 +282,7 @@ const getContribList = () => {
         for (let i = 0; i < commits.length; i += 1) {
           const author = commits[i].author().email();
           if (!authors[author]) {
-            authors[author] = 0;
+            authors[author] = 1;
           }
           authors[author] += 1;
         }
@@ -247,16 +290,12 @@ const getContribList = () => {
         return authors;
       })
   );
-};
 
-const getAllCommits = () => {
-  return nodegit.Repository.open(REPO_PATH).then(repo =>
+const getAllCommits = () =>
+  nodegit.Repository.open(REPO_PATH).then(repo =>
     repo
       .getCurrentBranch()
-      .then(ref => {
-        /* Get the commit that the branch points at. */
-        return repo.getBranchCommit(ref.shorthand());
-      })
+      .then(ref => repo.getBranchCommit(ref.shorthand()))
       .then(commit => {
         /* Set up the event emitter and a promise to resolve when it finishes up. */
         const hist = commit.history();
@@ -275,15 +314,16 @@ const getAllCommits = () => {
           const commit = {
             message: commits[i].message(),
             author: commits[i].author().email(),
-            date: Moment(commits[i].date()).format('YYYY-MM-DD')
+            date: Moment(commits[i].date()).format('YYYY-MM-DD'),
+            sha: commits[i].sha(),
+            body: commits[i].body(),
+            summary: commits[i].summary()
           };
-
           commitObj.push(commit);
         }
         return commitObj;
       })
   );
-};
 
 module.exports = {
   getContribList,
@@ -293,5 +333,6 @@ module.exports = {
   getFilesCommitCount,
   getAllCommits,
   getCurrentBranch,
-  commitFiles
+  commitFiles,
+  getAuthorStats
 };

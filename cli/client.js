@@ -20,6 +20,6 @@ app.get('*', (req, res) => {
 });
 app.listen(PORT, () => {
   console.log(
-    chalk.yellow('See you at:') + chalk.green('http://localhost:' + PORT)
+    chalk.yellow('See you at: ') + chalk.green(`http://localhost:${PORT}`)
   );
 });
